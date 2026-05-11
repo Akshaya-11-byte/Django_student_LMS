@@ -1,0 +1,35 @@
+{% extends "homepage.html" %} {% block title %} Student list {% endblock title %}
+ {% block content %}
+
+<h1 class="text-center mt-3 mb-3">Students List</h1>
+<div class="container">
+  <table class="table table-striped">
+    <thead class="border border-dark border-2 rounded">
+      <tr>
+        <th scope="col">S No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email Id</th>
+        <th scope="col">course</th>
+        <th scope="col">Enrollement_date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      <tr>
+        <th scope="row">{{student.id}}</th>
+        <td>{{student.student_Name}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.course}}</td>
+        <td>{{student.enrollement_date}}</td>
+        <td>
+          <a href=" {% url 'details' student.id %} " class="btn btn-primary" tabindex="-1" role="button">View</a>
+          <a href="#" class="btn btn-success" tabindex="-1" role="button">Update</a>
+          <a href="{% url 'delete_student' student.id %}" class="btn btn-danger" tabindex="-1" role="button">Delete</a>
+        </td>
+        {% endfor %}
+      </tr> 
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

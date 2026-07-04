@@ -1,11 +1,31 @@
-{% extends 'homepage.html' %}
+{% extends "homepage.html" %}
+
+{% block title %}
+Student Details
+{% endblock title %}
+
 {% block content %}
-<h1 class="text-center mt-3 mb-3"> Student Details</h1>
-<div class="container">
-    <form action="" method="POST">
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">Student Details</h2>
+
+    <form method="POST">
+
         {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="btn btn-primary">update</button>
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">
+            Update Student
+        </button>
+
+        <a href="{% url 'homepage' %}" class="btn btn-secondary">
+            Back
+        </a>
+
     </form>
+
 </div>
+
 {% endblock content %}

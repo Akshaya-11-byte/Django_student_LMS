@@ -15,30 +15,39 @@ def homepage(request):
     return render(request,"homepage1.html",context)
 
 def add_student(request):
-    if request.method=="POST" :
+    if request.method == "POST":
         form = Studentform(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect("homepage")
-    form=Studentform
-    context={
-        "form":form
-    }
-    return render(request,"add_student.html",context)
 
-def details(request,id):
-    if request.method=="POST":
-        student=get_object_or_404(StudentDetail,pk=id)
-        form=Studentform(request.POST,instance=student)
         if form.is_valid():
             form.save()
-        return redirect("homepage")
-    student=get_object_or_404(StudentDetail,pk=id)
-    form=Studentform(instance=student)
-    context={
-        "form":form
+            return redirect("homepage")
+
+    else:
+        form = Studentform()
+
+    context = {
+        "form": form
     }
-    return render(request,'view_details.html',context)
+
+    return render(request, "add_student.html", context)
+def details(request, id):
+    student = get_object_or_404(StudentDetail, pk=id)
+
+    if request.method == "POST":
+        form = Studentform(request.POST, instance=student)
+
+        if form.is_valid():
+            form.save()
+            return redirect("homepage")
+
+    else:
+        form = Studentform(instance=student)
+
+    context = {
+        "form": form
+    }
+
+    return render(request, "view_details.html", context)
 def delete_student(request,id):
     student=get_object_or_404(StudentDetail,pk=id)
     student.delete()
